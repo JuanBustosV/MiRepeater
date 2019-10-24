@@ -20,6 +20,7 @@
     <form id="form1" runat="server">
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <asp:UpdatePanel runat="server">
+
             <ContentTemplate>
                 <asp:Repeater ID="Repeater" runat="server" DataSourceID="SqlDataSource1">
                     <HeaderTemplate>
@@ -42,12 +43,11 @@
                                 <asp:Label ID="LblQPU" runat="server" Text='<%#Eval("QuantityPerUnit")%>' Width="100" CssClass="QuantityPerUnit"></asp:Label>
                             </td>
                             <td>
-                                <asp:TextBox ID="TxtPorcentaje" runat="server"></asp:TextBox>
-                                <asp:RangeValidator ID="RangeValidatorTxtPorcen" runat="server" ErrorMessage="RangeValidator" MinimumValue="0" MaximumValue="100" ControlToValidate="TxtPorcentaje"></asp:RangeValidator>
+                                <asp:TextBox ID="TxtPorcentaje" runat="server"></asp:TextBox>                                
                             </td>
                             <td>
                                 <asp:Button ID="BtnEliminar" runat="server" Text="Eliminar" OnClick="BtnEliminar_Click" />
-                                <input type="button" onclick="EliminarClick(this)" value="Borrar" />
+                                <input id="InElim" type="button" onclick="EliminarClick(this.id)" value="Borrar" />
                             </td>
                         </tr>
                     </ItemTemplate>
@@ -55,11 +55,13 @@
                         </table>
                     </FooterTemplate>
                 </asp:Repeater>
+                
 
-
-
+                
             </ContentTemplate>
-            
+            <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="BtnEliminar" EventName="Click" />
+            </Triggers>
         </asp:UpdatePanel>
         <asp:SqlDataSource runat="server" ConnectionString="<%$ ConnectionStrings:NORTHWINDConnectionString %>" SelectCommand="SELECT * FROM [Products]" ID="SqlDataSource1"></asp:SqlDataSource>
     </form>

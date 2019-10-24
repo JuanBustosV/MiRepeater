@@ -33,6 +33,8 @@ Partial Public Class WebForm1
     ''' <summary>
     ''' 
     ''' </summary>
+    ''' <remarks>
+    ''' </remarks>
     Protected WithEvents BtnEliminar As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
