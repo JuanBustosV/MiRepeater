@@ -10,62 +10,70 @@
     <script src="Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src="Scripts/repeater.js"></script>
     <style>
-        .ProductID{background-color:aqua}
-        .ProductName{background-color:yellow}
-        .QuantityPerUnit{background-color:Orange}
+        .rowEven {
+            background-color: lightyellow
+        }
+
+        .rowOdd {
+            background-color:palegreen
+        }
+
     </style>
 </head>
 <body>
-    
+
     <form id="form1" runat="server">
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-        <asp:UpdatePanel runat="server">
 
+        <asp:Button ID="BtnLoadData" runat="server" Text="Cargar Datos" OnClick="BtnLoadData_Click" />
+
+        <asp:HiddenField ID="RowId" runat="server" />
+
+        <asp:UpdatePanel runat="server" style="padding: 20px">
+            <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="BtnLoadData" EventName="Click" />
+            </Triggers>
             <ContentTemplate>
-                <asp:Repeater ID="Repeater" runat="server" DataSourceID="SqlDataSource1">
+                <asp:Repeater ID="Repeater" runat="server">
                     <HeaderTemplate>
-                        <table id="Tabla" border="1">
+                        <table id="gridTabla">
                             <tr>
                                 <th>Product ID</th>
-                                <th>Product Name</th>
+                                <th style="width:30%">Product Name</th>
                                 <th>Quantity Per Unit</th>
                             </tr>
                     </HeaderTemplate>
                     <ItemTemplate>
-                        <tr>
+                        <tr id='<%#"row_" & RowId.Value %>' class='<%#IIf(CType(RowId.Value, Integer) Mod 2 = 0, "rowEven", "rowOdd")%>'>    
                             <td>
-                                <asp:Label ID="LblProductID" runat="server" Text='<%#Eval("ProductID")%>' Width="100" CssClass="ProductID"></asp:Label>
+                                <asp:Label ID="LblProductID" runat="server" Text='<%#Eval("ProductID")%>' CssClass="ProductID"></asp:Label>
+                            </td>
+                            <td style="width:30%">
+                                <asp:Label ID="LblProductName" runat="server" Text='<%#Eval("ProductName")%>' CssClass="ProductName"></asp:Label>
                             </td>
                             <td>
-                                <asp:Label ID="LblProductName" runat="server" Text='<%#Eval("ProductName")%>' Width="100" CssClass="ProductName"></asp:Label>
+                                <asp:Label ID="LblQPU" runat="server" Text='<%#Eval("QuantityPerUnit")%>' CssClass="QuantityPerUnit"></asp:Label>
                             </td>
                             <td>
-                                <asp:Label ID="LblQPU" runat="server" Text='<%#Eval("QuantityPerUnit")%>' Width="100" CssClass="QuantityPerUnit"></asp:Label>
+                                <asp:TextBox ID="TxtPorcentaje" runat="server" ReadOnly="true"></asp:TextBox>
                             </td>
                             <td>
-                                <asp:TextBox ID="TxtPorcentaje" runat="server"></asp:TextBox>                                
+                                <input id='<%#"btnEdit_" & RowId.Value %>' type="button" onclick="EditarClick(this.id)" value="Editar" />
                             </td>
                             <td>
-                                <asp:Button ID="BtnEliminar" runat="server" Text="Eliminar" OnClick="BtnEliminar_Click" />
-                                <input id="InElim" type="button" onclick="EliminarClick(this.id)" value="Borrar" />
-                            </td>
+                                <input id='<%#"btnElim_" & RowId.Value %>' type="button" onclick="EliminarClick(getRowId(String(this.id)));" value="Borrar" />
+                            </td>                            
                         </tr>
                     </ItemTemplate>
                     <FooterTemplate>
                         </table>
                     </FooterTemplate>
                 </asp:Repeater>
-                
 
-                
             </ContentTemplate>
-            <Triggers>
-                <asp:AsyncPostBackTrigger ControlID="BtnEliminar" EventName="Click" />
-            </Triggers>
+
         </asp:UpdatePanel>
-        <asp:SqlDataSource runat="server" ConnectionString="<%$ ConnectionStrings:NORTHWINDConnectionString %>" SelectCommand="SELECT * FROM [Products]" ID="SqlDataSource1"></asp:SqlDataSource>
+        <%--<asp:SqlDataSource runat="server" ConnectionString="<%$ ConnectionStrings:NORTHWINDConnectionString %>" SelectCommand="SELECT * FROM [Products]" ID="SqlDataSource1"></asp:SqlDataSource>--%>
     </form>
-
-
 </body>
 </html>

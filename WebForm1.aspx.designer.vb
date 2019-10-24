@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class WebForm1
 
     '''<summary>
+    '''form1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
+
+    '''<summary>
     '''ScriptManager1 control.
     '''</summary>
     '''<remarks>
@@ -23,19 +32,22 @@ Partial Public Class WebForm1
     Protected WithEvents ScriptManager1 As Global.System.Web.UI.ScriptManager
 
     '''<summary>
-    '''form1 control.
+    '''BtnLoadData control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
-    ''' <summary>
-    ''' 
-    ''' </summary>
-    ''' <remarks>
-    ''' </remarks>
-    Protected WithEvents BtnEliminar As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents BtnLoadData As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''RowId control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RowId As Global.System.Web.UI.WebControls.HiddenField
 
     '''<summary>
     '''Repeater control.
@@ -45,13 +57,4 @@ Partial Public Class WebForm1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Repeater As Global.System.Web.UI.WebControls.Repeater
-
-    '''<summary>
-    '''SqlDataSource1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSource1 As Global.System.Web.UI.WebControls.SqlDataSource
 End Class
